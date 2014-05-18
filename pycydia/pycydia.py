@@ -32,6 +32,7 @@ class cydia:
     STATUS = None
     UDID = None
     PACKAGE_ID = None
+    ERROR = None
     VENDOR = None
     APIKEY = None
 
@@ -70,33 +71,38 @@ class cydia:
         request = requests.get('http://cydia.saurik.com/api/check?%s' % query)
 
         if request == None:
-            print "Failed to open request to Cydia"
-            return
+            self.ERROR = "Failed to open request to Cydia"
+            return False
 
         if request.content == None:
-            print "API request failed"
-            return
+            self.ERROR = "API request failed"
+            return False
 
         qs = cgi.parse_qs(request.content)
 
         if qs == None:
-            print "No request content"
-            return
+            self.ERROR = "No request content"
+            return False
 
         try:
             self.STATE = qs["state"][0]
         except KeyError:
             self.STATE = "uncompleted"
+            return False
 
         try:
             self.PROVIDER = qs["provider"][0]
         except KeyError:
             self.PROVIDER = None
+            return False
 
         try:
             self.STATUS = qs["status"][0]
         except KeyError:
             self.STATUS = None
+            return False
+
+        return True
 
 
     def purchaseCompleted(self):
