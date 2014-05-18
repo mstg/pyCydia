@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name = "pyCydia",
-    version = "1.0.2",
+    version = "1.0.3",
     author = "switchpwn",
     author_email = "mustiigezen@gmail.com",
     description = ("Cydia API wrapper for Python"),
