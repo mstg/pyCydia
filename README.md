@@ -18,10 +18,10 @@ $ pip install pyCydia
 Example
 =======
 ```python
-from pycydia import cydia
+from pycydia import pycydia
 
 if __name__ == "__main__":
-  client = cydia("udid", "package", "vendor", "api key")
+  client = pycydia.cydia("udid", "package", "vendor", "api key")
   
   # Check purchase against cydia servers
   client.checkCydiaPurchase()
